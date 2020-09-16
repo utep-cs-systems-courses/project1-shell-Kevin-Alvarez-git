@@ -26,14 +26,19 @@ while user_in != "exit":
             
             try:
                 os.execve(prompt, args, os.environ)
+                print(rc)
             except FileNotFoundError:
                 pass
 
+        print(args[0], 'command not found')
         sys.exit(1)
 
     else:
         if args[0] == 'cd':
-            os.chdir(args[1])
+            try:
+                os.chdir(args[1])
+            except:
+                print("Invalid directory")
         child_pid = os.wait()
     
     user_in = input(sys.ps1)
